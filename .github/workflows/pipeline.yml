@@ -1,5 +1,5 @@
 name: GitHub Workflows
-run-name: ${{ github.actor }} is creating a new pull request ${{ github.pull_request.id }} 😳
+run-name: ${{ github.actor }} is creating a new pull request to ${{ github.base_ref }}, start to test and deploy 😳
 env:
   AWS_REGION: ${{ secrets.NETFLOP_AWS_REGION  }}
   AWS_ACCESS_KEY_ID: ${{ secrets.NETFLOP_AWS_ACCESSKEYID }}
@@ -42,7 +42,7 @@ jobs:
         run: gradle build
 
       - name: Test
-        run: gradle test --test "*"
+        run: gradle test
 
       - name: Upload test report
         uses: actions/upload-artifact@v3
