@@ -1,6 +1,18 @@
-name: Github Action
-run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
-on: [push]
+name: GitHub Workflows
+run-name: ${{ github.actor }} is creating a new pull request 😳
+env:
+
+on:
+  push:
+    branches:
+      - 'develop'
+      - 'master'
+  pull_request:
+    types:
+      - opened
+      - reopened
+      - edited
+      - synchronize
 jobs:
   Explore-GitHub-Actions:
     runs-on: ubuntu-latest
