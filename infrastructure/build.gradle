@@ -1,0 +1,29 @@
+plugins {
+    id 'java'
+    id 'application'
+    id 'groovy'
+}
+
+group = 'org.example'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = JavaVersion.VERSION_17
+targetCompatibility = JavaVersion.VERSION_17
+def CDK_VERSION = "2.101.1"
+
+application {
+    mainClass = 'com.netflopbackend.cdkjava.NetflopBeApp'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation "software.amazon.awscdk:aws-cdk-lib:${CDK_VERSION}"
+    testImplementation platform('org.junit:junit-bom:5.9.1')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+}
+
+test {
+    useJUnitPlatform()
+}
