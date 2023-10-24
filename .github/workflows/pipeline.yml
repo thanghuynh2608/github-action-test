@@ -1,16 +1,16 @@
 name: GitHub Workflows
 run-name: ${{ github.actor }} is creating a new pull request to ${{ github.base_ref }}, start to test and deploy 😳
 env:
-  AWS_REGION: ${{ secrets.NETFLOP_AWS_REGION  }}
+  AWS_REGION: ${{ secrets.NETFLOP_AWS_REGION }}
   AWS_ACCESS_KEY_ID: ${{ secrets.NETFLOP_AWS_ACCESSKEYID }}
   AWS_SECRET_KEY: ${{ secrets.NETFLOP_AWS_SECRETKEY }}
-  ENVIRONMENT: ${{ github.base_ref == 'prod' && 'master' || 'dev' }}
+  ENVIRONMENT: ${{ github.base_ref == 'master' && 'prod' || 'dev' }}
 on:
   push:
     branches:
-      - 'develop'
-      - 'master'
-      - 'manual'
+      - "develop"
+      - "master"
+      - "manual"
   pull_request:
     types:
       - opened
@@ -31,9 +31,9 @@ jobs:
       - name: Set up Java
         uses: actions/setup-java@v3
         with:
-          distribution: 'oracle'
+          distribution: "oracle"
           java-version: 17
-          cache: 'gradle'
+          cache: "gradle"
 
       - name: Setup Gradle
         uses: gradle/gradle-build-action@v2
@@ -70,9 +70,9 @@ jobs:
       - name: Set up Java
         uses: actions/setup-java@v3
         with:
-          distribution: 'oracle'
+          distribution: "oracle"
           java-version: 17
-          cache: 'gradle'
+          cache: "gradle"
 
       - name: Setup Gradle
         uses: gradle/gradle-build-action@v2
@@ -86,7 +86,7 @@ jobs:
           node-version: "18"
 
       - name: Install CDK
-        run: | 
+        run: |
           npm install -g aws-cdk
 
       - name: CDK Synth
@@ -104,7 +104,6 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: dist-file
-
 #     - name: CDK bootstrap
 #       run: cdk bootstrap
 #
